@@ -1,0 +1,14 @@
+
+- Redux (for state management)
+
+- React Router (for routing)
+
+- Appwrite (for backend services)
+
+- TinyMCE (npm library for rich text editor)
+
+- HTML React Parser (to convert string html to react jsx)
+
+- React Hook Form (to handle form data)
+
+- Handling .env files
