@@ -11,6 +11,7 @@ import Select from "./Select";
 import Signup from "./Signup";
 import RTE from "./RTE";
 import AuthLayout from "./AuthLayout";
+import PostForm from "./Post-form/PostForm"
 
 
 
@@ -27,4 +28,7 @@ export {
   PostCard,
   Select,
   Signup,
+  RTE,
+  AuthLayout,
+  PostForm
 };
