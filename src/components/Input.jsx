@@ -6,7 +6,7 @@ const Input = React.forwardRef(function Input(
 ) {
   const id = useId();
   return (
-    <div className="w-full">
+    <div className="w-full block text-left">
       {label && (
         <label className="block mb-1" htmlFor={id}>
           {label}
