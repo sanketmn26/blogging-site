@@ -6,18 +6,19 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function PostForm({ post }) {
+  console.log(post)
   const { register, handleSubmit, watch, setValue, control, getValues } =
     useForm({
       defaultValues: {
         title: post?.title || "",
-        slug: post?.slug || "",
+        slug: post?.$id || "",
         content: post?.content || "",
         status: post?.status || "active",
       },
     });
 
   const navigate = useNavigate();
-  const userData = useSelector((state) => state.user.userData);
+  const userData = useSelector((state) => state.auth.userData);
 
   const submit = async (data) => {
     if (post) {
@@ -39,13 +40,13 @@ function PostForm({ post }) {
       }
     } else {
       const file = await appwriteService.uploadFile(data.image[0]);
-
+      
       if (file) {
         const fileId = file.$id;
         data.featuredImage = fileId;
         const dbPost = await appwriteService.createPost({
           ...data,
-          userData: userData.$id,
+          userId: userData.$id,
         });
 
         if (dbPost) {
@@ -60,27 +61,27 @@ function PostForm({ post }) {
       return value
         .trim()
         .toLowerCase()
-        .replace(/^[a-zA-Z\d\s]+/g, "-")
-        .replace(/\s/g, "-");
+        .replace(/[^a-z0-9\s-]/g, "")
+        .replace(/\s+/g, "-")
+        .replace(/-{2,}/g, "-")
+        .replace(/^-+|-+$/g, "");
     }
 
     return "";
+  }, []);
 
-    useEffect(() => {
-      const subscription = watch((value, { name }) => {
-        if (name === "title") {
-          setValue(
-            "slug",
-            slugTransform(value.title, { shouldValidate: true })
-          );
-        }
-      });
+  useEffect(() => {
+    const subscription = watch((value, { name }) => {
+      if (name === "title") {
+        setValue("slug", slugTransform(value.title, { shouldValidate: true }));
+      }
+    });
 
-      return () => {
-        subscription.unsubscribe();
-      };
-    }, [watch, slugTransform, setValue]);
-  });
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [watch, slugTransform, setValue]);
+
   return (
     <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
       <div className="w-2/3 px-2">

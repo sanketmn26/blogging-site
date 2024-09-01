@@ -1,5 +1,5 @@
-import cfg from "../cfg/cfg";
-import { Client, Account, ID, Databases, Storage, Query } from "appwrite";
+import cfg from "../cfg/cfg.js";
+import { Client, ID, Databases, Storage, Query } from "appwrite";
 
 export class Service {
   client = new Client();
@@ -11,7 +11,7 @@ export class Service {
     this.bucket = new Storage(this.client);
   }
 
-  async createPost({ title, slug, content, featuredImage, status }) {
+  async createPost({ title, slug, content, featuredImage, status, userId }) {
     try {
       return await this.databases.createDocument(
         cfg.appwriteDatabaseId,
