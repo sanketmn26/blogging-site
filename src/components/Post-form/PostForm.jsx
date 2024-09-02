@@ -88,13 +88,13 @@ function PostForm({ post }) {
         <Input
           label="Title :"
           placeholder="Title"
-          className="mb-4 w-2/3 inline-block"
+          className="mb-4 w-2/3"
           {...register("title", { required: true })}
         />
         <Input
           label="Slug :"
           placeholder="Slug"
-          className="mb-4 w-2/3 inline-block"
+          className="mb-4 w-2/3"
           {...register("slug", { required: true })}
           onInput={(e) => {
             setValue("slug", slugTransform(e.currentTarget.value), {

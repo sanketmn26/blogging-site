@@ -59,6 +59,7 @@ function Login() {
             <Input
               label="Email"
               placeholder="Enter your email"
+              className="w-full"
               type="email"
               {...register("email", {
                 required: true,
@@ -73,6 +74,7 @@ function Login() {
             <Input
               label="Password: "
               type="password"
+              className="w-full"
               placeholder="Enter your password"
               {...register("password", { required: true })}
             />

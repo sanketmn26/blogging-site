@@ -57,6 +57,7 @@ function Signup() {
           <div className="space-y-5">
             <Input
               label="Name:"
+              className="w-full"
               placeholder="Enter your name"
               {...register("name", { required: true })}
             />
@@ -65,6 +66,7 @@ function Signup() {
               label="Email:"
               placeholder="Enter your email"
               type="email"
+              className="w-full"
               {...register("email", {
                 required: true,
                 validate: {
@@ -78,6 +80,7 @@ function Signup() {
             <Input
               label="Password:"
               type="password"
+              className="w-full"
               placeholder="Enter your password"
               {...register("password", {
                 required: true,
